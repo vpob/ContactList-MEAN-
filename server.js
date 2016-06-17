@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('cList', ['list']);
+// var db = mongojs('cList', ['list']);
 var bodyParser = require('body-parser');
+
+var db = mongojs("mongodb://root:clientlistroot@ds017544.mlab.com:17544/clientlist",['list'])
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
@@ -47,7 +49,7 @@ app.get('/contactlist/:id', function(req, res){
 		res.json(doc);
 		});
 });
-app.listen(process.env.PORT, function(err){
+app.listen(process.env.PORT || 3000, function(err){
 	if(!err)
 		console.log('Server running....');
 })
